@@ -14,9 +14,45 @@ app.post('/addemp', (req, res) => {
     insertEmployee(req, res);
 
 })
-app.get('/list',(req,res)=>{
+app.get('/list', (req, res) => {
 
-    res.send("data inserted")
+    Employee.find((err, docs) => {
+        if (!err) {
+
+            res.render('employeeList', {
+                list: docs
+            })
+        }
+        else {
+
+            console.log("error in data fetching..")
+        }
+    })
+})
+
+app.get('/getdatabyid/:id', (req, res) => {
+
+    Employee.findById(req.params.id, (err, docs) => {
+        if (!err) {
+            res.render('employeedetail', {
+                emp: docs
+            })
+        }
+    })
+
+})
+app.get('/delete/:id',(req,res)=>{
+
+    
+    Employee.findByIdAndRemove(req.params.id,(err,docs)=>{
+
+        if(!err){
+
+            res.redirect('/list')
+        }
+
+    })
+
 })
 
 function insertEmployee(req, res) {
@@ -28,7 +64,7 @@ function insertEmployee(req, res) {
     employee.save((error, success) => {
 
         if (!error) {
-            
+
             res.redirect('/list')
         }
         else {
