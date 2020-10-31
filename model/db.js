@@ -12,3 +12,4 @@ mongoose.connect("mongodb://localhost:27017/club1",{useUnifiedTopology:true},(er
 })
 
 require('./EmployeeBean')
+require('./UserBean')
