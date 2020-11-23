@@ -17,10 +17,12 @@ var employee = require('./controllers/EmployeeController')
 var user = require('./controllers/UserController');
 var admin = require('./controllers/AdminController')
 const { use } = require('./controllers/EmployeeController');
+var fileuploading = require('./controllers/FileUpoadController')
 
 app.use('/employee',employee)
 app.use('/user',user)
 app.use('/admin',admin)
+app.use('/file',fileuploading)
 
 app.listen(3000,()=>{
 
